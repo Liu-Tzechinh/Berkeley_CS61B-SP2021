@@ -138,6 +138,16 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        int size = b.size();
+
+        for (int col = 0; col < size; col += 1) {
+            for (int row = 0; row < size; row += 1) {
+                Tile tile = b.tile(col, row);
+                if (tile == null) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -148,6 +158,16 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        int size = b.size();
+
+        for (int col = 0; col < size; col += 1) {
+            for (int row = 0; row < size; row += 1) {
+                Tile tile = b.tile(col, row);
+                if (tile != null && tile.value() == MAX_PIECE) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -159,6 +179,28 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        if (emptySpaceExists(b)) {
+            return true;
+        } else {
+            int size = b.size();
+            for (int col = 0; col < size; col++) {
+                for (int row = 0; row < size; row ++) {
+                    Tile tile = b.tile(col, row);
+                    if (col + 1 < size) {
+                        Tile tileRight = b.tile(col+1, row);
+                        if (tile.value() == tileRight.value()) {
+                            return true;
+                        }
+                    }
+                    if (row + 1 < size) {
+                        Tile tileUp = b.tile(col, row+1);
+                        if (tile.value() == tileUp.value()) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
         return false;
     }
 
