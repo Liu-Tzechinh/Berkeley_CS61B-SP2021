@@ -94,6 +94,60 @@ public class Model extends Observable {
         setChanged();
     }
 
+    // merge all tilts that can be merged ->  move
+
+    /**
+     * merge all tiles that can be merged
+     * @param col
+     * @param row
+     * @return
+     */
+    private boolean mergeHelper(int col, Board b) {
+        int size = b.size();
+        boolean changed;
+        changed = false;
+        for (int row = size - 1; row >= 0; row--) {
+            Tile tile = b.tile(col, row);
+            if (tile != null) {
+                // determinate werther there is a tile can be merged with b.tile(col, row)
+                for (int subRow = row - 1; subRow >= 0; subRow--) {
+                    Tile subtile = b.tile(col, subRow);
+                    if (subtile != null) {
+                        if (tile.value() == subtile.value()) {
+                            changed = b.move(col, row, subtile);
+                            this.score += tile.value() * 2;
+                            row = subRow;
+                        } else {
+                         row = subRow + 1;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        return changed;
+    }
+
+    private boolean moveHelper(int col, Board b) {
+        int size = b.size();
+        boolean changed;
+        changed = false;
+        for (int row = size - 1; row >= 0; row--) {
+            Tile tile = b.tile(col, row);
+            if (tile == null) {
+                // determinate werther there is a tile can be moved toward b.tile(col, row)
+                for (int subRow = row - 1; subRow >= 0; subRow--) {
+                    Tile subtile = b.tile(col, subRow);
+                    if (subtile != null) {
+                        b.move(col, row, subtile);
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return changed;
+    }
     /** Tilt the board toward SIDE. Return true iff this changes the board.
      *
      * 1. If two Tile objects are adjacent in the direction of motion and have
@@ -107,13 +161,29 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      * */
     public boolean tilt(Side side) {
-        boolean changed;
+        boolean changed, changedMerge, changedMove;
         changed = false;
-
+        changedMerge = false;
+        changedMove = false;
+        int size = board.size();
+        board.setViewingPerspective(side);
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+        for (int col = 0; col < size; col++) {
+            if (changedMerge || changedMove) {
+                changed = true;
+            }
+            changedMerge = mergeHelper(col, board);
+            changedMove =  moveHelper(col, board);
+        }
 
+
+
+        if (changedMerge || changedMove) {
+            changed = true;
+        }
+        board.setViewingPerspective(Side.NORTH);
         checkGameOver();
         if (changed) {
             setChanged();
