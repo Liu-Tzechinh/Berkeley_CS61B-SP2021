@@ -20,7 +20,6 @@ public class Collatz {
             return n / 2;
         }
     }
-
     public static void main(String[] args) {
         int n = 5;
         System.out.print(n + " ");
@@ -31,4 +30,3 @@ public class Collatz {
         System.out.println();
     }
 }
-
