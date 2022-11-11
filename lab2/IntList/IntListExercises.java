@@ -1,5 +1,7 @@
 package IntList;
 
+import net.sf.saxon.functions.ConstantFunction;
+
 public class IntListExercises {
 
     /**
@@ -14,6 +16,7 @@ public class IntListExercises {
             head.first += c;
             head = head.rest;
         }
+        head.first += c;
     }
 
     /**
@@ -26,7 +29,10 @@ public class IntListExercises {
     public static void setToZeroIfMaxFEL(IntList L) {
         IntList p = L;
         while (p != null) {
-            if (firstDigitEqualsLastDigit(max(p))) {
+            int currentMax = max(p);
+            boolean firstEqualsLast = firstDigitEqualsLastDigit(currentMax);
+            if (firstEqualsLast) {
+            //if (firstDigitEqualsLastDigit(max(p))) {
                 p.first = 0;
             }
             p = p.rest;
@@ -51,13 +57,30 @@ public class IntListExercises {
      */
     public static boolean firstDigitEqualsLastDigit(int x) {
         int lastDigit = x % 10;
-        while (x > 10) {
+        while (x >= 10) {
             x = x / 10;
         }
         int firstDigit = x % 10;
         return firstDigit == lastDigit;
     }
 
+
+    private static boolean squarePrimesHelper(IntList lst, boolean currElemIsPrime) {
+        // Base Case: we have reached the end of the list
+        if (lst == null) {
+            return currElemIsPrime;
+        }
+
+
+        // currElemIsPrime = Primes.isPrime(lst.first);
+
+        if (Primes.isPrime(lst.first)) {
+            lst.first *= lst.first;
+            currElemIsPrime = true;
+        }
+
+        return squarePrimesHelper(lst.rest, currElemIsPrime);
+    }
     /**
      * Part C: (Buggy) mutative method that squares each prime
      * element of the IntList.
@@ -67,16 +90,17 @@ public class IntListExercises {
      */
     public static boolean squarePrimes(IntList lst) {
         // Base Case: we have reached the end of the list
-        if (lst == null) {
-            return false;
-        }
+        //if (lst == null) {
+        //    return false;
+        //}
 
-        boolean currElemIsPrime = Primes.isPrime(lst.first);
+        //boolean currElemIsPrime = Primes.isPrime(lst.first);
 
-        if (currElemIsPrime) {
-            lst.first *= lst.first;
-        }
+        //if (currElemIsPrime) {
+        //    lst.first *= lst.first;
+        //}
 
-        return currElemIsPrime || squarePrimes(lst.rest);
+        //return currElemIsPrime || squarePrimes(lst.rest);
+        return squarePrimesHelper(lst, false);
     }
 }
