@@ -1,9 +1,5 @@
 package IntList;
 
-// import net.sf.saxon.functions.ConstantFunction;
-
-// import net.sf.saxon.functions.ConstantFunction;
-
 public class IntListExercises {
 
     /**
@@ -69,7 +65,7 @@ public class IntListExercises {
     }
 
 
-    private static boolean squarePrimesHelper(IntList lst, boolean currElemIsPrime) {
+    private static boolean squarePrimes(IntList lst, boolean currElemIsPrime) {
         // Base Case: we have reached the end of the list
         if (lst == null) {
             return currElemIsPrime;
@@ -83,7 +79,7 @@ public class IntListExercises {
             currElemIsPrime = true;
         }
 
-        return squarePrimesHelper(lst.rest, currElemIsPrime);
+        return squarePrimes(lst.rest, currElemIsPrime);
     }
     /**
      * Part C: (Buggy) mutative method that squares each prime
@@ -105,6 +101,6 @@ public class IntListExercises {
         //}
 
         //return currElemIsPrime || squarePrimes(lst.rest);
-        return squarePrimesHelper(lst, false);
+        return squarePrimes(lst, false);
     }
 }
