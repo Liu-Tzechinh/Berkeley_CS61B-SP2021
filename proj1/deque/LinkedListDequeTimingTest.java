@@ -12,7 +12,7 @@ import org.junit.Test;
  *
  * reference: CS61B prof hug
  */
-public class TimingTest {
+public class LinkedListDequeTimingTest {
     private static void printTimingTable(int[] Ns, double[] times, int[] opCounts) {
         System.out.printf("%12s %12s %12s %12s\n", "N", "time (s)", "# ops", "microsec/op");
         System.out.printf("------------------------------------------------------------\n");
@@ -23,30 +23,30 @@ public class TimingTest {
             double timePerOp = time / opCount * 1e6;
             System.out.printf("%12d %12.2f %12d %12.2f\n", N, time, opCount, timePerOp);
         }
-     }
+    }
 
 
 
-     @Test
-     public void timeLinkedListDequeAddFirst() {
-         System.out.println("---------Timing LinkedListDeque.java addFirst method-------");
-         int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
-         int[] opCounts = new int[Ns.length];
-         double[] times = new double[Ns.length];
+    @Test
+    public void timeLinkedListDequeAddFirst() {
+        System.out.println("---------Timing LinkedListDeque.java addFirst method-------");
+        int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
+        int[] opCounts = new int[Ns.length];
+        double[] times = new double[Ns.length];
 
-         for (int i = 0; i < Ns.length; i++) {
-             opCounts[i] = Ns[i];
-             LinkedListDeque<String> lld = new LinkedListDeque<>();
-             Stopwatch sw = new Stopwatch();
-             for (int j = 0; j < Ns[i]; j++) {
-                 lld.addFirst("a");
-             }
-             times[i] = sw.elapsedTime();
-         }
-         printTimingTable(Ns, times, opCounts);
-     }
+        for (int i = 0; i < Ns.length; i++) {
+            opCounts[i] = Ns[i];
+            LinkedListDeque<String> lld = new LinkedListDeque<>();
+            Stopwatch sw = new Stopwatch();
+            for (int j = 0; j < Ns[i]; j++) {
+                lld.addFirst("a");
+            }
+            times[i] = sw.elapsedTime();
+        }
+        printTimingTable(Ns, times, opCounts);
+    }
 
-     @Test
+    @Test
     public void timeLinkedListDequeAddLast() {
         System.out.println("---------Timing LinkedListDeque.java addLast method-------");
         int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
