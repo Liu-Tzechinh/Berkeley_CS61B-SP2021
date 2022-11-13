@@ -1,5 +1,6 @@
 package deque;
 import edu.princeton.cs.algs4.Stopwatch;
+import org.junit.Test;
 
 /**
  * Timing test
@@ -24,27 +25,11 @@ public class TimingTest {
         }
      }
 
-     public static void main(String[] args) {
-        System.out.println("---------Timing LinkedListDeque.java addFirst method-------");
-        timeLinkedListDequeAddFirst();
 
-         System.out.println("---------Timing LinkedListDeque.java addLast method-------");
-         timeLinkedListDequeAddLast();
 
-         System.out.println("---------Timing LinkedListDeque.java removeFirst method-------");
-         timeLinkedListDequeRemoveFirst();
-
-         System.out.println("---------Timing LinkedListDeque.java removeLast method-------");
-         timeLinkedListDequeRemoveLast();
-
-         System.out.println("---------Timing LinkedListDeque.java get method-------");
-         timeLinkedListDequeGet();
-
-         System.out.println("---------Timing LinkedListDeque.java getRecursive method-------");
-         timeLinkedListDequeGetRecursive();
-     }
-
-     public static void timeLinkedListDequeAddFirst() {
+     @Test
+     public void timeLinkedListDequeAddFirst() {
+         System.out.println("---------Timing LinkedListDeque.java addFirst method-------");
          int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
          int[] opCounts = new int[Ns.length];
          double[] times = new double[Ns.length];
@@ -61,7 +46,9 @@ public class TimingTest {
          printTimingTable(Ns, times, opCounts);
      }
 
-    public static void timeLinkedListDequeAddLast() {
+     @Test
+    public void timeLinkedListDequeAddLast() {
+        System.out.println("---------Timing LinkedListDeque.java addLast method-------");
         int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
         int[] opCounts = new int[Ns.length];
         double[] times = new double[Ns.length];
@@ -79,8 +66,9 @@ public class TimingTest {
     }
 
 
-
-    public static void timeLinkedListDequeRemoveFirst() {
+    @Test
+    public void timeLinkedListDequeRemoveFirst() {
+        System.out.println("---------Timing LinkedListDeque.java removeFirst method-------");
         int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
         int[] opCounts = new int[Ns.length];
         double[] times = new double[Ns.length];
@@ -103,7 +91,9 @@ public class TimingTest {
     }
 
 
-    public static void timeLinkedListDequeRemoveLast() {
+    @Test
+    public  void timeLinkedListDequeRemoveLast() {
+        System.out.println("---------Timing LinkedListDeque.java removeLast method-------");
         int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
         int[] opCounts = new int[Ns.length];
         double[] times = new double[Ns.length];
@@ -125,7 +115,9 @@ public class TimingTest {
         printTimingTable(Ns, times, opCounts);
     }
 
-    public static void timeLinkedListDequeGet() {
+    @Test
+    public  void timeLinkedListDequeGet() {
+        System.out.println("---------Timing LinkedListDeque.java get method-------");
         int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
         int[] opCounts = new int[Ns.length];
         double[] times = new double[Ns.length];
@@ -148,7 +140,9 @@ public class TimingTest {
         printTimingTable(Ns, times, opCounts);
     }
 
-    public static void timeLinkedListDequeGetRecursive() {
+    @Test
+    public void timeLinkedListDequeGetRecursive() {
+        System.out.println("---------Timing LinkedListDeque.java getRecursive method-------");
         int[] Ns = {1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 1000000};
         int[] opCounts = new int[Ns.length];
         double[] times = new double[Ns.length];
