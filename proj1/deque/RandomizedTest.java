@@ -21,7 +21,7 @@ public class RandomizedTest {
                 } else if (opNumber == 2) {
                     assertEquals(lld.size(), ad.size());
                 } else if (opNumber == 3) {
-                    int index = StdRandom.uniform(lld.size()+1);
+                    int index = StdRandom.uniform(lld.size() + 1);
                     assertEquals(lld.get(index), ad.get(index));
                 } else if (opNumber == 4) {
                     assertEquals(lld.removeFirst(), ad.removeFirst());

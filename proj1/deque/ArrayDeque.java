@@ -153,7 +153,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         return null;
     }
 
-    @Override
     public void set(T item, int index) {
         if (!checkOutOfBound(index)) {
             items[(firstNext + index + 1) % items.length] = item;
@@ -206,5 +205,18 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
             }
         }
         return false;
+    }
+
+    /** Prints the items in the deque from first to last, separated
+     * by a space. Once all the items have been printed, print out a new line.
+     */
+    public void printDeque() {
+        for (int i = 0; i < size(); i++) {
+            System.out.print(get(i));
+            if (i < size() - 1) {
+                System.out.print(" ");
+            }
+        }
+        System.out.println();
     }
 }

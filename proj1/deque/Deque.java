@@ -18,20 +18,7 @@ public interface Deque<T> {
 
     T get(int index);
 
-    void set(T item, int index);
 
-    /** Prints the items in the deque from first to last, separated
-     * by a space. Once all the items have been printed, print out a new line.
-     */
-    default void printDeque() {
-        for (int i = 0; i < size(); i++) {
-            System.out.print(get(i));
-            if (i < size() - 1) {
-                System.out.print(" ");
-            }
-        }
-        System.out.println();
-    }
 
     T removeFirst();
 

@@ -128,10 +128,6 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
         return temp.item;
     }
 
-    @Override
-    public void set(T item, int index) {
-        // TODO
-    };
 
     private T getRecursive(TNode temp, int index) {
         if (index == 0) {
@@ -195,5 +191,16 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
         }
         return false;
     }
-
+    /** Prints the items in the deque from first to last, separated
+     * by a space. Once all the items have been printed, print out a new line.
+     */
+    public void printDeque() {
+        for (int i = 0; i < size(); i++) {
+            System.out.print(get(i));
+            if (i < size() - 1) {
+                System.out.print(" ");
+            }
+        }
+        System.out.println();
+    }
 }
