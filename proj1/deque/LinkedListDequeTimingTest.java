@@ -72,7 +72,7 @@ public class LinkedListDequeTimingTest {
         double[] times = new double[nS.length];
 
         for (int i = 0; i < nS.length; i++) {
-            // ConStruction of varied size Deque
+            /* ConStruction of varied size Deque */
             LinkedListDeque<String> lld = new LinkedListDeque<>();
             for (int j = 0; j < nS[i]; j++) {
                 lld.addLast("a");
@@ -97,7 +97,7 @@ public class LinkedListDequeTimingTest {
         double[] times = new double[nS.length];
 
         for (int i = 0; i < nS.length; i++) {
-            // ConStruction of varied size Deque
+            /* Construction of varied size Deque */
             LinkedListDeque<String> lld = new LinkedListDeque<>();
             for (int j = 0; j < nS[i]; j++) {
                 lld.addLast("a");
@@ -121,7 +121,7 @@ public class LinkedListDequeTimingTest {
         double[] times = new double[nS.length];
 
         for (int i = 0; i < nS.length; i++) {
-            // ConStruction of varied size Deque
+            /* Construction of varied size Deque */
             LinkedListDeque<String> lld = new LinkedListDeque<>();
             for (int j = 0; j < nS[i]; j++) {
                 lld.addLast("a");
@@ -131,7 +131,6 @@ public class LinkedListDequeTimingTest {
             Stopwatch sw = new Stopwatch();
             for (int j = 0; j < opCounts[i]; j++) {
                 lld.get(nS[i]/2);
-                // lld.get(1000);
             }
             times[i] = sw.elapsedTime();
         }
@@ -146,7 +145,7 @@ public class LinkedListDequeTimingTest {
         double[] times = new double[nS.length];
 
         for (int i = 0; i < nS.length; i++) {
-            // ConStruction of varied size Deque
+            /* Construction of varied size Deque */
             LinkedListDeque<String> lld = new LinkedListDeque<>();
             for (int j = 0; j < nS[i]; j++) {
                 lld.addLast("a");
@@ -155,7 +154,7 @@ public class LinkedListDequeTimingTest {
             opCounts[i] = 1000;
             Stopwatch sw = new Stopwatch();
             for (int j = 0; j < opCounts[i]; j++) {
-                // lld.getRecursive(nS[i]/2); StackOverflowError
+                /* lld.getRecursive(nS[i]/2); StackOverflowError */
                 lld.getRecursive(1000);
             }
             times[i] = sw.elapsedTime();

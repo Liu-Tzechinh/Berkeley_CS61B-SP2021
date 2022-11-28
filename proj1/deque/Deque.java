@@ -1,7 +1,5 @@
 package deque;
 
-import static javax.swing.UIManager.get;
-
 public interface Deque<T> {
 
     void addFirst(T item);

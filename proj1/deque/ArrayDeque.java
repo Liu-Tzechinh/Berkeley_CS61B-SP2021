@@ -30,13 +30,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         lastNext = CAPACITY / 2 + 1;
     }
 
-    public ArrayDeque(int c) {
-        size = 0;
-        items = (T[]) new Object[c];
-        firstNext = c / 2;
-        lastNext = c / 2 + 1;
-    }
-
     /** Copies the items to new underlying array.
      *  Uses for-loop
      *  Leftmost
@@ -153,11 +146,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         return null;
     }
 
-    public void set(T item, int index) {
-        if (!checkOutOfBound(index)) {
-            items[(firstNext + index + 1) % items.length] = item;
-        }
-    }
     /** The deques objects we’ll make are iterable, so we must provide this method
      * to return an iterator.
      * @return
@@ -191,14 +179,15 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
      * @return
      */
     public boolean equals(Object o) {
-        if (o instanceof ArrayDeque) {
-            ArrayDeque object = (ArrayDeque) o;
+        if (o instanceof Deque) {
+            Deque object = (Deque) o;
             if (object.size() == size) {
                 for (int i = 0; i < size; i++) {
                     if (!object.get(i).equals(get(i))) {
                         return false;
                     }
                 }
+
                 return true;
             } else {
                 return false;
