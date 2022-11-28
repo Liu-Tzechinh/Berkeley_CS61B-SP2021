@@ -1,16 +1,11 @@
 package deque;
-import org.apache.commons.math3.exception.OutOfRangeException;
-
-import java.util.Comparator;
 import java.util.Iterator;
-
-import static javax.swing.UIManager.get;
 
 /** A circular array based Double Ended Queue (Deque).
  * @author Liu-Tzechinh
  * @param <T>
  */
-public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
+public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     // The original CAPACITY of the underlying array.
     private final int CAPACITY = 8;
     // For arrays of length 16 or more, your usage factor should always be at least 25%.
@@ -72,7 +67,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
         } else {
             int length = items.length - srcPos;
             System.arraycopy(items, srcPos, temp, 0, length);
-            System.arraycopy(items, 0, temp, length,lastNext);
+            System.arraycopy(items, 0, temp, length, lastNext);
             // System.arraycopy(items, 0, temp, length, size - length);
         }
         firstNext = capacity - 1;
@@ -96,7 +91,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     }
 
     @Override
-    /** Adds an item of type T to the front of the deque. Item should not be null. */
     public void addFirst(T item) {
         if (item != null) {
             resize();
@@ -107,7 +101,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     }
 
     @Override
-    /** Adds an item of type T to the back of the deque. Item should not be null. */
     public void addLast(T item) {
         if (item != null) {
             resize();
@@ -119,16 +112,11 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
 
 
     @Override
-    /** Returns the number of items in the deque. */
     public int size() {
         return size;
     }
 
     @Override
-    /** Removes and returns the item at the front of the deque.
-     * If no such item exists, return null.
-     * @return
-     */
     public T removeFirst() {
         if (isEmpty()) {
             return null;
@@ -141,8 +129,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     }
 
     @Override
-    /** Removes and returns the item at the back of the deque.
-     * if no such item exists, return null. */
     public T removeLast() {
         if (isEmpty()) {
             return null;
@@ -160,9 +146,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     }
 
     @Override
-    /** Gets the item at the given index, where 0 is the front, 1 is the
-     * next item, and so forth. If no such item exists, return null. Must
-     * not alter the deque. */
     public T get(int index) {
         if (!checkOutOfBound(index)) {
             return items[(firstNext + index + 1) % items.length];
@@ -187,7 +170,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     private class ArrayDequeIterator implements Iterator<T> {
         private int position;
 
-        public ArrayDequeIterator() {
+        ArrayDequeIterator() {
             position = 0;
         }
 

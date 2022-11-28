@@ -11,7 +11,7 @@ public interface Deque<T> {
 
     /** Returns true if deque is empty, false otherwise. */
     default boolean isEmpty() {
-        return size()==0;
+        return size() == 0;
     };
 
     int size();

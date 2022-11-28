@@ -3,13 +3,13 @@ package deque;
 import java.util.Iterator;
 
 /** A circular sentinel linked list based Deque of type T. */
-public class LinkedListDeque<T> implements Iterable<T>, Deque<T>{
+public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
 
     private class TNode {
-        public T item;
-        public TNode prev;
-        public TNode next;
-        public TNode(T item, TNode prev, TNode next) {
+        private T item;
+        private TNode prev;
+        private TNode next;
+        TNode(T item, TNode prev, TNode next) {
             this.item = item;
             this.prev = prev;
             this.next = next;
@@ -129,7 +129,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T>{
     }
 
     @Override
-    public void set(T item, int index){
+    public void set(T item, int index) {
         // TODO
     };
 
@@ -158,7 +158,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T>{
     private class LinkedListDequeIterator implements Iterator<T> {
         private int position;
 
-        public LinkedListDequeIterator() {
+        LinkedListDequeIterator() {
             position = 0;
         }
 
