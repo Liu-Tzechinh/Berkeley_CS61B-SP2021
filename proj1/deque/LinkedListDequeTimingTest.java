@@ -130,7 +130,7 @@ public class LinkedListDequeTimingTest {
             opCounts[i] = 1000;
             Stopwatch sw = new Stopwatch();
             for (int j = 0; j < opCounts[i]; j++) {
-                lld.get(nS[i]/2);
+                lld.get(nS[i] / 2);
             }
             times[i] = sw.elapsedTime();
         }
