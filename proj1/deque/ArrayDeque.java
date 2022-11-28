@@ -1,10 +1,16 @@
 package deque;
+import org.apache.commons.math3.exception.OutOfRangeException;
+
+import java.util.Comparator;
+import java.util.Iterator;
+
+import static javax.swing.UIManager.get;
 
 /** A circular array based Double Ended Queue (Deque).
  * @author Liu-Tzechinh
  * @param <T>
  */
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     // The original CAPACITY of the underlying array.
     private final int CAPACITY = 8;
     // For arrays of length 16 or more, your usage factor should always be at least 25%.
@@ -27,6 +33,13 @@ public class ArrayDeque<T> {
         items = (T[]) new Object[CAPACITY];
         firstNext = CAPACITY / 2;
         lastNext = CAPACITY / 2 + 1;
+    }
+
+    public ArrayDeque(int c) {
+        size = 0;
+        items = (T[]) new Object[c];
+        firstNext = c / 2;
+        lastNext = c / 2 + 1;
     }
 
     /** Copies the items to new underlying array.
@@ -82,6 +95,7 @@ public class ArrayDeque<T> {
         }
     }
 
+    @Override
     /** Adds an item of type T to the front of the deque. Item should not be null. */
     public void addFirst(T item) {
         if (item != null) {
@@ -92,6 +106,7 @@ public class ArrayDeque<T> {
         }
     }
 
+    @Override
     /** Adds an item of type T to the back of the deque. Item should not be null. */
     public void addLast(T item) {
         if (item != null) {
@@ -102,32 +117,14 @@ public class ArrayDeque<T> {
         }
     }
 
-    /** Returns true if deque is empty, false otherwise. */
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
+    @Override
     /** Returns the number of items in the deque. */
     public int size() {
         return size;
     }
 
-    /** Prints the items in the deque from first to last, separated
-     * by a space. Once all the items have been printed, print out a new line.
-     */
-    public void printDeque() {
-        int idx = 1;
-        while (idx <= size) {
-            System.out.print(items[(firstNext + idx) % items.length]);
-            if (idx == size) {
-                System.out.println();
-            } else {
-                System.out.print(" ");
-            }
-            idx++;
-        }
-    }
-
+    @Override
     /** Removes and returns the item at the front of the deque.
      * If no such item exists, return null.
      * @return
@@ -143,6 +140,7 @@ public class ArrayDeque<T> {
         return tmp;
     }
 
+    @Override
     /** Removes and returns the item at the back of the deque.
      * if no such item exists, return null. */
     public T removeLast() {
@@ -161,6 +159,7 @@ public class ArrayDeque<T> {
         return index < 0 || index >= size;
     }
 
+    @Override
     /** Gets the item at the given index, where 0 is the front, 1 is the
      * next item, and so forth. If no such item exists, return null. Must
      * not alter the deque. */
@@ -171,13 +170,37 @@ public class ArrayDeque<T> {
         return null;
     }
 
+    @Override
+    public void set(T item, int index) {
+        if (!checkOutOfBound(index)) {
+            items[(firstNext + index + 1) % items.length] = item;
+        }
+    }
     /** The deques objects we’ll make are iterable, so we must provide this method
      * to return an iterator.
      * @return
      */
-//    public Iterator<T> iterator() {
-//        return null;
-//    }
+    public Iterator<T> iterator() {
+        return new ArrayDequeIterator();
+    }
+
+    private class ArrayDequeIterator implements Iterator<T> {
+        private int position;
+
+        public ArrayDequeIterator() {
+            position = 0;
+        }
+
+        public boolean hasNext() {
+            return position < size;
+        }
+
+        public T next() {
+            T returnItem = get(position);
+            position += 1;
+            return returnItem;
+        }
+    }
 
     /** Returns whether the parameter O is equal to the deque or not.
      * o is considered equal if it is a deque and if it contains the same

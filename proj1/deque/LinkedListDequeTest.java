@@ -270,4 +270,16 @@ public class LinkedListDequeTest {
         lld2.addLast("2");
         assertTrue(lld1.equals(lld2));
     }
+
+    @Test
+    public void iteratorTest() {
+        LinkedListDeque<String> lld = new LinkedListDeque<>();
+        lld.addFirst("world");
+        lld.addFirst("Hello");
+        lld.addFirst("!");
+        lld.printDeque();
+        for (String t : lld) {
+            System.out.println(t);
+        }
+    }
 }

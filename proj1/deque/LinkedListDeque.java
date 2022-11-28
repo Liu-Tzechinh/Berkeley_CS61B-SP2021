@@ -1,7 +1,10 @@
 package deque;
 
+import java.util.Iterator;
+
 /** A circular sentinel linked list based Deque of type T. */
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Iterable<T>, Deque<T>{
+
     private class TNode {
         public T item;
         public TNode prev;
@@ -33,6 +36,7 @@ public class LinkedListDeque<T> {
         size = 1;
     }
 
+    @Override
     /** Adds an item of type T to the front of the deque. Item should not be null. */
     public void addFirst(T item) {
         if (item == null) {
@@ -48,6 +52,7 @@ public class LinkedListDeque<T> {
         // second the LinkedListDeque is empty
     }
 
+    @Override
     /** Adds an item of type T to the back of the Deque. Item should not be null. */
     public void addLast(T item) {
         if (item == null) {
@@ -63,30 +68,13 @@ public class LinkedListDeque<T> {
         // second the LinkedListDeque is empty
     }
 
-    /** Returns true if deque is empty, false otherwise. */
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
+    @Override
     /** Returns the number of items in the deque. */
     public int size() {
         return size;
     }
 
-    /** Prints the items in the deque from first to last, separated by a space.
-     * Once all the items have been printed, print out a new line.
-      */
-    public void printDeque() {
-        TNode node = sentinel.next;
-        for (int i = 0; i < size; i++) {
-            System.out.print(node.item);
-            if (i < size - 1) {
-                System.out.print(" ");
-            }
-            node = node.next;
-        }
-        System.out.println();
-    }
 
     /** Removes and returns the item at the front of the deque.
      * If no such item exists, return nulls.
@@ -124,6 +112,8 @@ public class LinkedListDeque<T> {
         }
         return false;
     }
+
+    @Override
     /** Gets the item at the given index, where 0 is the front, 1 is the next item,
      * and so forth. If no such item exists, returns null. Must not alter the deque. */
     public T get(int index) {
@@ -137,6 +127,11 @@ public class LinkedListDeque<T> {
         }
         return temp.item;
     }
+
+    @Override
+    public void set(T item, int index){
+        // TODO
+    };
 
     private T getRecursive(TNode temp, int index) {
         if (index == 0) {
@@ -156,9 +151,27 @@ public class LinkedListDeque<T> {
     /* The deque objects we'll make are iterable, so we must provide this method
     to return an iterator.
      */
-//    public Iterator<T> iterator() {
-//        return null;
-//    }
+    public Iterator<T> iterator() {
+        return new LinkedListDequeIterator();
+    }
+
+    private class LinkedListDequeIterator implements Iterator<T> {
+        private int position;
+
+        public LinkedListDequeIterator() {
+            position = 0;
+        }
+
+        public boolean hasNext() {
+            return position < size;
+        }
+
+        public T next() {
+            T returnItem = get(position);
+            position += 1;
+            return returnItem;
+        }
+    }
 
     /** Returns whether the parameter O is equal to the deque or not.
      * o is considered equal if it is a deque and if it contains the same
@@ -182,4 +195,5 @@ public class LinkedListDeque<T> {
         }
         return false;
     }
+
 }
